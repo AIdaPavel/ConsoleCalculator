@@ -34,20 +34,44 @@ namespace ConsoleCalculator
 
         private static void setFirstNumber() 
         {
-            Console.WriteLine("Введите первое число.");
-            firstNumber = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Введите первое число: ");
+            
+            try
+            {
+                firstNumber = Convert.ToInt32(Console.ReadLine());
+            }
+            catch 
+            {
+                Console.WriteLine("Неверный формат числа, повторите ввод.");
+                setFirstNumber();
+            }
         }
 
         private static void setSecondNumber()
         {
-            Console.WriteLine("Введите второе число.");
-            secondNumber = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Введите второе число: ");
+            try
+            {
+                secondNumber = Convert.ToInt32(Console.ReadLine());
+            }
+            catch
+            {
+                Console.WriteLine("Неверный формат числа, повторите ввод.");
+                setSecondNumber();
+            }
         }
 
         private static void setOprion()
         {
-            Console.WriteLine("Выберите операцию: '+', '-', '*', '/'.");
+            Console.Write("Выберите операцию: '+', '-', '*', '/': ");
             operand = Console.ReadLine();
+
+            if (operand.Equals("+") || operand.Equals("-") || operand.Equals("*") || operand.Equals("/")) { }
+            else {
+                Console.WriteLine("Неверный формат операнда, повторите ввод.");
+                setOprion();
+            }
+
         }
 
         private static void calculation() 
@@ -55,19 +79,26 @@ namespace ConsoleCalculator
             switch (operand)
             {
                 case "+":
-                    Console.WriteLine(firstNumber + secondNumber);
+                    Console.WriteLine("Ваш результат: " + (firstNumber + secondNumber));
+                    Console.WriteLine();
                     break;
                 case "-":
-                    Console.WriteLine(firstNumber - secondNumber);
+                    Console.WriteLine("Ваш результат: " + (firstNumber - secondNumber)); 
+                    Console.WriteLine();
                     break;
                 case "*":
-                    Console.WriteLine(firstNumber * secondNumber);
+                    Console.WriteLine("Ваш результат: " + firstNumber * secondNumber);
+                    Console.WriteLine();
                     break;
                 case "/":
                     if (secondNumber == 0)
+                    {
                         Console.WriteLine(0);
+                        Console.WriteLine();
+                    }
                     else
-                        Console.WriteLine((double)firstNumber / (double)secondNumber);
+                        Console.WriteLine("Ваш результат: " + (double)firstNumber / (double)secondNumber);
+                        Console.WriteLine();
                     break;
             }
         }
